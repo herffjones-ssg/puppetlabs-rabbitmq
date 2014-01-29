@@ -16,7 +16,7 @@
 #  stdlib
 # Sample Usage:
 #
-#  
+#
 #
 #
 # [Remember: No empty lines between comments and class definition]
@@ -58,7 +58,7 @@ class rabbitmq::server(
   $plugin_dir = "/usr/lib/rabbitmq/lib/rabbitmq_server-${version_real}/plugins"
 
   package { $package_name:
-    ensure => $pkg_ensure_real,
+    ensure => present,
     notify => Class['rabbitmq::service'],
   }
 
@@ -92,8 +92,8 @@ class rabbitmq::server(
   }
 
   class { 'rabbitmq::service':
+    ensure       => $service_ensure,
     service_name => $service_name,
-    ensure => $service_ensure,
   }
 
   if $delete_guest_user {
